@@ -16,9 +16,7 @@ class AddressBook(UserDict):
     def find(self, name:str)-> Record|None:
         return self.data.get(name, None)
 
+    def delete(self, name: str) -> None | str:
+        if self.data.pop(name, None) is None:
+            return f"{name} not found in your AddressBook"
 
-    def delete(self, name:str)-> None|str:
-        if name in self.data:
-            del self.data[name]
-        else:
-            return print(f"{name} not found in your AddressBook")

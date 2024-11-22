@@ -20,19 +20,16 @@ class Record:
 
     def edit_phone(self, old_phone:str, new_phone:str)-> None:
         phone_obj = self._get_phone_or_raise(old_phone)
-        phone_obj.value = new_phone
+        phone_obj.value = Phone(new_phone).value
 
     def find_phone(self, phone:str)-> Phone|None:
-        return self._find_phone_by_value(phone)
-
-    def _find_phone_by_value(self, phone:str)-> Phone|None:
         for p in self.phones:
             if p.value == phone:
                 return p
         return None
 
     def _get_phone_or_raise(self, phone: str)->Phone:
-        phone_obj = self._find_phone_by_value(phone)
+        phone_obj = self.find_phone(phone)
         if phone_obj is None:
             raise ValueError(f"Phone number {phone} not found")
         return phone_obj
